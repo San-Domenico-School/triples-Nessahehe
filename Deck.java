@@ -1,17 +1,20 @@
+import java.util.ArrayList;
+
 /**
- * Write a description of class Deck here.
+ * This is the deck class. It has all the cards here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @Vanessa Sumski
+ * @01/23/24
  */
 
 import greenfoot.*;
 
 public class Deck 
 {
-    /****************************************************
-    ***   Leave as comment until ready to implement   ***
-    *****************************************************
+    private Card[] unShuffledDeck;
+    private ArrayList<Card> shuffledDeck;
+    
+    
     // adds all the cards to the unshuffled deck.   
     private void populateUnshuffledDeckWithCards(int numOfCardsInDeck)        
     {
@@ -267,7 +270,61 @@ public class Deck
                         new GreenfootImage("Triplets_2/triangle_red_3_2_selected.png"));
                 }
           }
+    
+          }
+    public Card getTopCard()
+    {
+            return null;
     }
     
-    **************  END OF COMMENT BLOCK  ***************/
+    protected ArrayList<Card> getShuffledDeck()
+    {
+        return shuffledDeck;
+    }
+    protected int getNumCardsInDeck() 
+    {
+        return 0;
+    }
+    
+
+    // Returns the card from the shuffled deck at the specified index
+    protected Card getShuffledCard(int index) 
+    {
+            if (index >= 0 && index < shuffledDeck.size())
+            {
+                return shuffledDeck.get(index);
+            }
+            else
+            {
+                return null;
+            }
+    }
+
+
+    // Returns 27 if the parameter is less than or equal to 27, otherwise returns 81
+    protected int limitNumCardsInDeck(int num) {
+        return 0;
+    }
+    
+    public Deck(int numOfCardsInDeck)
+    {
+        numOfCardsInDeck = limitNumCardsInDeck(numOfCardsInDeck);
+        unShuffledDeck = new Card[numOfCardsInDeck + 1];
+        shuffledDeck = new ArrayList<>();
+        populateUnShuffledDeckWithCards();
+        createShuffledDeck();
+    }
+    private void populateUnShuffledDeckWithCards()
+    {
+        
+    }
+    private void createShuffledDeck() 
+    {
+        
+    }
+
+    public static void main(String[] args)
+    {
+        new Tester(GameBoard.NUM_CARDS_IN_DECK);
+    }
 }

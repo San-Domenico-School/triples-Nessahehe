@@ -21,7 +21,7 @@ public class Dealer extends Actor
         this.numCardsInDeck = numCardsInDeck;
         this.triplesRemaining = numCardsInDeck / 3;
         
-        this.deck = new Deck();
+        this.deck = new Deck(numCardsInDeck);
         
         this.cardsOnBoard = new ArrayList<Card>();
         this.selectedCardsIndex = new ArrayList<Integer>();
@@ -30,11 +30,34 @@ public class Dealer extends Actor
     }
     public void addedToWorld(World world)
     {
-        
+        dealBoard();
+        setUI();
     }
     public void dealBoard()
     {
+        Greenfoot.playSound("shuffle.wav");
         
+        int rows = 5;
+        int columns = 3;
+        if(deck.getNumCardsInDeck() >= rows * columns)
+        { 
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < columns; col++)
+            {
+                Card topCard = deck.getTopCard();
+                
+                if (topCard != null)
+                {
+                    int cardX = col * 60;
+                    int cardY = row * 60;
+                    
+                    getWorld().addObject(topCard, cardX, cardY);
+                    cardsOnBoard.add(topCard);
+                }
+            }
+        }
+    }
     }
     public void setUI()
     {

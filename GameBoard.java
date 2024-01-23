@@ -8,15 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameBoard extends World
 {
-    private static final int NUM_CARDS_IN_DECK = 27;
+    public static final int NUM_CARDS_IN_DECK = 27;
     
     public GameBoard()
     {   
-        super(430, 600, 1, false); 
-        Tester tester = new Tester("Scorekeeper");
-        //new Tester();
-        
+    super(430, 600, 1, false); 
+    new Tester(NUM_CARDS_IN_DECK);
     }
-
-
 }
