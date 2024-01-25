@@ -10,11 +10,7 @@ public class Scorekeeper
     private static int deckSize;
     private static int score;
     private static long startTime;
-    
-    private Scorekeeper()
-    {
-        
-    }
+
     //Initializing startTime with the current system time
     static 
     {

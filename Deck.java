@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Arrays;
 
 /**
  * This is the deck class. It has all the cards here.
@@ -270,12 +272,18 @@ public class Deck
                         new GreenfootImage("Triplets_2/triangle_red_3_2_selected.png"));
                 }
           }
-    
           }
     public Card getTopCard()
-    {
-            return null;
-    }
+        {
+            if (!shuffledDeck.isEmpty())
+            {
+                return shuffledDeck.get(0);
+            }
+                else
+            {
+                return null;
+            }
+        }
     
     protected ArrayList<Card> getShuffledDeck()
     {
@@ -320,7 +328,9 @@ public class Deck
     }
     private void createShuffledDeck() 
     {
-        
+        ArrayList<Card> tempDeck = new ArrayList<>(Arrays.asList(unShuffledDeck));
+        Collections.shuffle(tempDeck);
+        shuffledDeck.addAll(tempDeck);
     }
 
     public static void main(String[] args)

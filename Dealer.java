@@ -4,8 +4,8 @@ import java.util.ArrayList;  // (World, Actor, GreenfootImage, Greenfoot and Mou
 /**
  * Write a description of class Dealer here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @Vanessa Sumski 
+ * @01/25/24
  */
 public class Dealer extends Actor
 {
@@ -37,31 +37,46 @@ public class Dealer extends Actor
     {
         Greenfoot.playSound("shuffle.wav");
         
-        int rows = 5;
-        int columns = 3;
-        if(deck.getNumCardsInDeck() >= rows * columns)
-        { 
-        for (int row = 0; row < rows; row++)
+        int xOffset = 5;
+        int yOffset = 5;
+        int rowSpacing = 50;
+        int colSpacing = 100;
+        
+        for (int row = 0; row < 5; row++)
         {
-            for (int col = 0; col < columns; col++)
+            for(int col = 0; col < 3; col++)
             {
                 Card topCard = deck.getTopCard();
-                
                 if (topCard != null)
                 {
-                    int cardX = col * 60;
-                    int cardY = row * 60;
+                Card dealtCard = new Card(
+                    topCard.getShape(),
+                    topCard.getColor(),
+                    topCard.getNumberOfShapes(),
+                    topCard.getShading(),
+                    topCard.getCardImage(),
+                    topCard.getSelectedCardImage()
                     
-                    getWorld().addObject(topCard, cardX, cardY);
-                    cardsOnBoard.add(topCard);
+                    );
+                    
+                GameBoard world = (GameBoard) getWorld();
+                world.addObject(dealtCard, xOffset + col * colSpacing, yOffset + row * rowSpacing);
                 }
-            }
+                }
         }
-    }
     }
     public void setUI()
     {
+        int cardsRemaining = deck.getNumCardsInDeck();
+        int currentScore = calculateScore();
         
+        // Convert values to String
+        String cardsRemainingStr = Integer.toString(cardsRemaining);
+        String currentScoreStr = Integer.toString(currentScore);
+        
+        // Display on board
+        getWorld().showText(cardsRemainingStr,300, 470); // Cards remaining
+        getWorld().showText(currentScoreStr, 300, 505); // Score
     }
     public void endGame()
     {
@@ -78,5 +93,9 @@ public class Dealer extends Actor
     public void setCardsSelected(ArrayList<Card> cards, ArrayList<Integer> indices, Card[] selectedCards)
     {
         
+    }
+    private int calculateScore()
+    {
+        return 0;
     }
 }
