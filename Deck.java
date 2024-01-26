@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.List;
 
 /**
  * This is the deck class. It has all the cards here.
@@ -15,6 +17,8 @@ public class Deck
 {
     private Card[] unShuffledDeck;
     private ArrayList<Card> shuffledDeck;
+    private GreenfootImage cardImageInstance;
+    private GreenfootImage selectedCardImageInstance;
     
     
     // adds all the cards to the unshuffled deck.   
@@ -322,17 +326,50 @@ public class Deck
         populateUnShuffledDeckWithCards();
         createShuffledDeck();
     }
-    private void populateUnShuffledDeckWithCards()
-    {
+    private void populateUnShuffledDeckWithCards() {
+    for (int i = 0; i < unShuffledDeck.length; i++) {
+        unShuffledDeck[i] = createCard();
         
+        unShuffledDeck[0] = new Card(Card.Shape.NO_SHAPE, Card.Color.NO_COLOR, 0, 0, cardImageInstance, selectedCardImageInstance);
     }
+    }
+    
     private void createShuffledDeck() 
     {
-        ArrayList<Card> tempDeck = new ArrayList<>(Arrays.asList(unShuffledDeck));
-        Collections.shuffle(tempDeck);
-        shuffledDeck.addAll(tempDeck);
+        List<Card> unshuffledList = Arrays.asList(unShuffledDeck);
+    Collections.shuffle(unshuffledList);
+    shuffledDeck.addAll(unshuffledList);
+    }
+    private Card.Shape getRandomShape() {
+        Random random = new Random();
+        Card.Shape[] shapes = Card.Shape.values();
+        return shapes[random.nextInt(shapes.length)];
     }
 
+    private Card.Color getRandomColor() {
+        Random random = new Random();
+        Card.Color[] colors = Card.Color.values();
+        return colors[random.nextInt(colors.length)];
+    }
+    private int getRandomNumberOfShapes() {
+        Random random = new Random();
+        return random.nextInt(3) + 1; // Assuming you want 1 to 3 shapes
+    }
+
+    // Returns a random shading value (adjust the range as needed)
+    private int getRandomShading() {
+        Random random = new Random();
+        return random.nextInt(3); // Assuming you want 0 to 2 for shading
+    }
+    private Card createCard() 
+    {
+    Card.Shape randomShape = getRandomShape();
+    Card.Color randomColor = getRandomColor();
+    int numberOfShapes = getRandomNumberOfShapes();
+    int shading = getRandomShading();
+
+    return new Card(randomShape, randomColor, numberOfShapes, shading, cardImageInstance, selectedCardImageInstance);
+    }
     public static void main(String[] args)
     {
         new Tester(GameBoard.NUM_CARDS_IN_DECK);

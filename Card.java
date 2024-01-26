@@ -39,13 +39,14 @@ public class Card extends Actor
     }
     public Card(Card other)
     {
-        this.shape = shape;
-       this.color = color;
-       this.numberOfShapes = numberOfShapes;
-       this.shading = shading;
-       this.cardImage = cardImage;
-       this.selectedCardImage = selectedCardImage;
-       
+        this.shape = other.shape;
+       this.color = other.color;
+       this.numberOfShapes = other.numberOfShapes;
+       this.shading = other.shading;
+       this.cardImage = other.cardImage;
+       this.selectedCardImage = other.selectedCardImage;
+       this.isSelected = other.isSelected;
+       setImage(cardImage);
     
     }
     public Shape getShape() 

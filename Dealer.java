@@ -39,29 +39,19 @@ public class Dealer extends Actor
         
         int xOffset = 5;
         int yOffset = 5;
-        int rowSpacing = 50;
-        int colSpacing = 100;
+        int rowSpacing = 10;
+        int colSpacing = 30;
         
         for (int row = 0; row < 5; row++)
         {
             for(int col = 0; col < 3; col++)
             {
                 Card topCard = deck.getTopCard();
-                if (topCard != null)
-                {
-                Card dealtCard = new Card(
-                    topCard.getShape(),
-                    topCard.getColor(),
-                    topCard.getNumberOfShapes(),
-                    topCard.getShading(),
-                    topCard.getCardImage(),
-                    topCard.getSelectedCardImage()
-                    
-                    );
-                    
+                if (topCard != null) {
+                Card dealtCard = new Card(topCard);
                 GameBoard world = (GameBoard) getWorld();
                 world.addObject(dealtCard, xOffset + col * colSpacing, yOffset + row * rowSpacing);
-                }
+            }
                 }
         }
     }

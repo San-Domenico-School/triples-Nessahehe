@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameBoard extends World
 {
-    public static final int NUM_CARDS_IN_DECK = 27;
+    public static final int NUM_CARDS_IN_DECK = 81;
     
     public GameBoard()
     {   
@@ -17,8 +17,8 @@ public class GameBoard extends World
     }
     private void prepareScene()
     {
-        Dealer dealer = new Dealer(NUM_CARDS_IN_DECK);
+        Dealer Dealer = new Dealer(NUM_CARDS_IN_DECK);
         
-        addObject(dealer, -30, -30);
+        addObject(Dealer, -30, -30);
     }
 }
