@@ -24,6 +24,7 @@ public class Deck
     // adds all the cards to the unshuffled deck.   
     private void populateUnshuffledDeckWithCards(int numOfCardsInDeck)        
     {
+        unShuffledDeck = new Card[numOfCardsInDeck + 1 ];
         unShuffledDeck[0] = new Card(Card.Shape.NO_SHAPE, Card.Color.NO_COLOR,0,0,
                 new GreenfootImage("Triplets_0/blank_0_0_0.png"), 
                 new GreenfootImage("Triplets_0/blank_0_0_0.png"));
@@ -279,14 +280,7 @@ public class Deck
           }
     public Card getTopCard()
         {
-            if (!shuffledDeck.isEmpty())
-            {
-                return shuffledDeck.get(0);
-            }
-                else
-            {
-                return null;
-            }
+            return shuffledDeck.remove(0);
         }
     
     protected ArrayList<Card> getShuffledDeck()
@@ -295,7 +289,7 @@ public class Deck
     }
     protected int getNumCardsInDeck() 
     {
-        return 0;
+        return shuffledDeck.size();
     }
     
 
@@ -315,7 +309,7 @@ public class Deck
 
     // Returns 27 if the parameter is less than or equal to 27, otherwise returns 81
     protected int limitNumCardsInDeck(int num) {
-        return 0;
+        return (num <= 27) ? 27 : 81;
     }
     
     public Deck(int numOfCardsInDeck)
@@ -323,20 +317,14 @@ public class Deck
         numOfCardsInDeck = limitNumCardsInDeck(numOfCardsInDeck);
         unShuffledDeck = new Card[numOfCardsInDeck + 1];
         shuffledDeck = new ArrayList<>();
-        populateUnShuffledDeckWithCards();
+        populateUnshuffledDeckWithCards(numOfCardsInDeck);
         createShuffledDeck();
     }
-    private void populateUnShuffledDeckWithCards() {
-    for (int i = 0; i < unShuffledDeck.length; i++) {
-        unShuffledDeck[i] = createCard();
-        
-        unShuffledDeck[0] = new Card(Card.Shape.NO_SHAPE, Card.Color.NO_COLOR, 0, 0, cardImageInstance, selectedCardImageInstance);
-    }
-    }
+
     
     private void createShuffledDeck() 
     {
-        List<Card> unshuffledList = Arrays.asList(unShuffledDeck);
+    List<Card> unshuffledList = Arrays.asList(unShuffledDeck);
     Collections.shuffle(unshuffledList);
     shuffledDeck.addAll(unshuffledList);
     }

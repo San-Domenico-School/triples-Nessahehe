@@ -24,7 +24,7 @@ public class Card extends Actor
    private boolean isSelected;
    private GreenfootImage cardImage, selectedCardImage;
    private int numberOfShapes, shading;
-   
+   private int value; 
    
    public Card(Shape shape, Color color, int numberOfShapes, int shading, GreenfootImage cardImage, GreenfootImage selectedCardImage) 
    {
@@ -36,18 +36,6 @@ public class Card extends Actor
        this.selectedCardImage = selectedCardImage;
        
        setImage(cardImage);
-    }
-    public Card(Card other)
-    {
-        this.shape = other.shape;
-       this.color = other.color;
-       this.numberOfShapes = other.numberOfShapes;
-       this.shading = other.shading;
-       this.cardImage = other.cardImage;
-       this.selectedCardImage = other.selectedCardImage;
-       this.isSelected = other.isSelected;
-       setImage(cardImage);
-    
     }
     public Shape getShape() 
     {
@@ -74,13 +62,21 @@ public class Card extends Actor
         System.out.println(selectedCardImage);
         return selectedCardImage;
     }
-    public boolean getIsSelected()
+    public boolean isSelected()
     {
         return isSelected;
     }
-    public void setIsSelected(boolean isSelected)
+    public void setIsSelected(boolean selected)
     {
-        this.isSelected = isSelected;
+        isSelected = isSelected;
+    }
+    public Card(int value) 
+    {
+        this.value = value;
+    }
+    public int getValue() 
+    {
+        return value;
     }
 }
 

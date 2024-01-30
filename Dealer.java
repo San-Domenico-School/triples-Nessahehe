@@ -13,22 +13,17 @@ public class Dealer extends Actor
     private ArrayList<Card> cardsOnBoard;
     private ArrayList<Integer> selectedCardsIndex;
     private Card[] cardsSelected;
-    private int numCardsInDeck;
-    private int triplesRemaining;
+    private int numCardsInDeck, triplesRemaining;
+    
     
     public Dealer(int numCardsInDeck)
     {
         this.numCardsInDeck = numCardsInDeck;
-        this.triplesRemaining = numCardsInDeck / 3;
-        
-        this.deck = new Deck(numCardsInDeck);
-        
-        this.cardsOnBoard = new ArrayList<Card>();
-        this.selectedCardsIndex = new ArrayList<Integer>();
-        
-        this.cardsSelected = new Card[3];
+        triplesRemaining = numCardsInDeck / 3;
+        deck = new Deck(numCardsInDeck);
+        cardsSelected = new Card[3];
     }
-    public void addedToWorld(World world)
+    public void addedToWorld(World i)
     {
         dealBoard();
         setUI();
@@ -37,55 +32,34 @@ public class Dealer extends Actor
     {
         Greenfoot.playSound("shuffle.wav");
         
-        int xOffset = 5;
-        int yOffset = 5;
-        int rowSpacing = 10;
-        int colSpacing = 30;
+        int marginY = 45;
+        int marginX = 73;
         
-        for (int row = 0; row < 5; row++)
+        for (int row = 0; row < 3; row++)
         {
-            for(int col = 0; col < 3; col++)
+            for (int column = 0; column < 5; column++)
             {
-                Card topCard = deck.getTopCard();
-                if (topCard != null) {
-                Card dealtCard = new Card(topCard);
-                GameBoard world = (GameBoard) getWorld();
-                world.addObject(dealtCard, xOffset + col * colSpacing, yOffset + row * rowSpacing);
+                getWorld().addObject(deck.getTopCard(), marginX + row * 140, marginY + column * 80);
             }
-                }
         }
-    }
+    
+    }  
     public void setUI()
     {
-        int cardsRemaining = deck.getNumCardsInDeck();
-        int currentScore = calculateScore();
-        
-        // Convert values to String
-        String cardsRemainingStr = Integer.toString(cardsRemaining);
-        String currentScoreStr = Integer.toString(currentScore);
-        
+        Integer score = new Integer(Scorekeeper.getScore());
         // Display on board
-        getWorld().showText(cardsRemainingStr,300, 470); // Cards remaining
-        getWorld().showText(currentScoreStr, 300, 505); // Score
+        getWorld().showText(String.valueOf(numCardsInDeck),300, 470); // Cards remaining
+        getWorld().showText(String.valueOf(score), 300, 505); // Score
     }
     public void endGame()
     {
         
     }
-    public void checkIfTriple()
-    {
-        
-    }
-    public void actionIfTriple()
-    {
-        
-    }
-    public void setCardsSelected(ArrayList<Card> cards, ArrayList<Integer> indices, Card[] selectedCards)
-    {
-        
-    }
-    private int calculateScore()
-    {
-        return 0;
+    public boolean checkIfTriple(Card[] cards) {
+        if (cards.length == 3) {
+            boolean isTriple = cards[0].getValue() == cards[1].getValue() && cards[1].getValue() == cards[2].getValue();
+            return isTriple;
+        }
+        return false;
     }
 }
