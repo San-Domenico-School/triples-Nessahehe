@@ -14,10 +14,16 @@ public class Player extends Actor
     private ArrayList<Card> cardsOnBoard;
     private ArrayList<Integer> selectedCardsIndex;
     private ArrayList<GreenfootImage> originalImages;
+    private GreenfootImage cardImageInstance;
+    private GreenfootImage selectedCardImageInstance;
+    private boolean isSelected;
     
-    public Player(Dealer dealer)
+    
+    public Player(Dealer dealer) 
     {
         this.dealer = dealer;
+        this.cardImageInstance = cardImageInstance;
+        this.selectedCardImageInstance = selectedCardImageInstance;
         cardsSelected = new Card[3];
         cardsOnBoard = new ArrayList<Card>();
         selectedCardsIndex = new ArrayList<Integer>();
@@ -38,50 +44,51 @@ public class Player extends Actor
         boolean threeCardsHaveBeenSelected = setCardsSelected();
         if (threeCardsHaveBeenSelected)
         {
+            dealer.setCardsSelected(cardsOnBoard, cardsSelected, selectedCardsIndex);
             dealer.checkIfTriple(cardsSelected);
             resetCardsSelected();
         }
     }
-
-    public void selectCards() 
-    {
-    for (int i = 0; i < cardsOnBoard.size(); i++) 
-    {
+    
+    public void selectCards() {
+    for (int i = 0; i < cardsOnBoard.size(); i++) {
         Card card = cardsOnBoard.get(i);
-        GreenfootImage originalImage = originalImages.get(i);
 
-        if (Greenfoot.mouseClicked(card)) 
-        {
-            if (card.isSelected()) 
-            {
-                // If the card is already selected
-                card.setIsSelected(false);
-                card.setImage(originalImage);  // Restore to unselected card image
-                selectedCardsIndex.remove(selectedCardsIndex.indexOf(i));
-            } 
-            else
-                    card.setIsSelected(true);
-                    card.setImage(originalImage);
-                    selectedCardsIndex.add(i);
-                }
+        // Check if the card is clicked
+        if (Greenfoot.mouseClicked(card)) {
+            if (card.isSelected()) {
+                // If the card is already selected, deselect it
+                card.isSelected = false;
+                card.setImage(cardImageInstance); // Set to unselected card image
+                selectedCardsIndex.remove(Integer.valueOf(i)); // Remove from selectedCardIndex
+            } else {
+                // If the card is not selected, select it
+                card.isSelected = true;
+                card.setImage(selectedCardImageInstance); // Set to selected card image
+                selectedCardsIndex.add(i); // Add to selectedCardIndex
             }
         }
+    }
+    }
     private boolean setCardsSelected() 
     {
-        if (selectedCardsIndex.size() == 3) {
-            for (int i = 0; i < 3; i++) {
-                cardsSelected[i] = cardsOnBoard.get(selectedCardsIndex.get(i));
-            }
-            return true;
+    if (selectedCardsIndex.size() == 3) 
+    {
+        for (int i = 0; i < 3; i++) 
+        {
+            cardsSelected[i] = cardsOnBoard.get(selectedCardsIndex.get(i));
         }
-        return false;
+        return true;
+    }
+    return false;
     }
     private void resetCardsSelected() 
     {
-        for (int i = 0; i < cardsOnBoard.size(); i++) {
-            cardsOnBoard.get(i).setImage(originalImages.get(i)); // Restore to original image
-            cardsOnBoard.get(i).setIsSelected(false);
-        }
-        selectedCardsIndex.clear();
+    for (int i = 0; i < cardsOnBoard.size(); i++) 
+    {
+        cardsOnBoard.get(i).setImage(originalImages.get(i)); // Restore to original image
+        cardsOnBoard.get(i).isSelected = false;
+    }
+    selectedCardsIndex.clear();
     }
 }

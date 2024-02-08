@@ -62,4 +62,13 @@ public class Dealer extends Actor
         }
         return false;
     }
+    public void setCardsSelected(ArrayList<Card> cardsOnBoard, Card[] cardsSelected, ArrayList<Integer> selectedCardsIndex) {
+        if (cardsOnBoard.size() == selectedCardsIndex.size()) 
+        {
+            for (int i = 0; i < selectedCardsIndex.size(); i++) 
+            {
+                cardsSelected[i] = cardsOnBoard.get(selectedCardsIndex.get(i));
+            }
+        }
+    }
 }
