@@ -48,8 +48,8 @@ public class Dealer extends Actor
     {
         Integer score = new Integer(Scorekeeper.getScore());
         // Display on board
-        getWorld().showText(String.valueOf(numCardsInDeck),300, 470); // Cards remaining
-        getWorld().showText(String.valueOf(score), 300, 505); // Score
+        getWorld().showText(" " + deck.getNumCardsInDeck(), 300, 470); // Cards remaining
+        getWorld().showText(" " + Scorekeeper.getScore(), 300, 505); // Score
     }
     public void endGame()
     {

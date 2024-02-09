@@ -22,14 +22,8 @@ public class Scorekeeper
     }
     public static void updateScore()
     {
-        long currentTime = System.currentTimeMillis();
-        long elapsedTime = currentTime - startTime;
-        
-        int timeBonus = (int) (1000 - elapsedTime / 1000);
-        
-        timeBonus = Math.min(timeBonus, NUM_CARDS_IN_DECK);
-        
-        score += timeBonus;
+        score += 35 - (System.currentTimeMillis() - startTime) / 1000 > 5 ? (int) (30 - (System.currentTimeMillis() - startTime) / 1000) : 5;
+        startTime = System.currentTimeMillis();
     }
     public static int getScore()
     {
