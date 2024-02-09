@@ -20,7 +20,7 @@ public class GameBoard extends World
         Dealer dealer = new Dealer(NUM_CARDS_IN_DECK);
         Player player = new Player(dealer);
         
-        addObject(player, -30, -30);
         addObject(dealer, -30, -30);
+        addObject(player, -30, -30);
     }
 }

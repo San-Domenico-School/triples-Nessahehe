@@ -55,20 +55,52 @@ public class Dealer extends Actor
     {
         
     }
-    public boolean checkIfTriple(Card[] cards) {
-        if (cards.length == 3) {
-            boolean isTriple = cards[0].getValue() == cards[1].getValue() && cards[1].getValue() == cards[2].getValue();
-            return isTriple;
-        }
-        return false;
-    }
-    public void setCardsSelected(ArrayList<Card> cardsOnBoard, Card[] cardsSelected, ArrayList<Integer> selectedCardsIndex) {
-        if (cardsOnBoard.size() == selectedCardsIndex.size()) 
+    public void checkIfTriple() 
+    {
+        Card card0 = cardsSelected[0];
+        Card card1 = cardsSelected[1];
+        Card card2 = cardsSelected[2];
+        
+        //variable to verify if mod 3 == 0
+        boolean cardSides = (card0.getNumberOfShapes() + card1.getNumberOfShapes() + card2.getNumberOfShapes()) % 3 == 0;
+        boolean cardShading = (card0.getShading() + card1.getShading() + card2.getShading()) % 3 == 0;
+        boolean cardColor = (card0.getColor().ordinal() + card1.getColor().ordinal() + card2.getColor().ordinal()) % 3 == 0;
+        boolean cardShape = (card0.getShape().ordinal() + card1.getShape().ordinal() + card2.getShape().ordinal()) % 3 == 0;
+        
+        if (cardSides && cardShading && cardColor && cardShape)
         {
-            for (int i = 0; i < selectedCardsIndex.size(); i++) 
+            actionIfTriple();
+        }
+        else
+        {
+            int i = 0;
+        }
+    }
+    public void actionIfTriple()
+    {
+        //Animations.slideAndTurn(cardsSelected);
+        
+        for (Card card: cardsSelected)
+        {
+            int x = card.getX();
+            int y = card.getY();
+            
+            getWorld().removeObject(card);
+            cardsOnBoard.remove(card);
+            
+            Card cardAdded = deck.getTopCard();
+            
+            if(cardAdded != null)
             {
-                cardsSelected[i] = cardsOnBoard.get(selectedCardsIndex.get(i));
+                cardsOnBoard.add(cardAdded);
+                getWorld().addObject(cardAdded, x, y);
             }
         }
+    }
+
+    public void setCardsSelected(ArrayList<Card> cardsOnBoard, Card[] cardsSelected, ArrayList<Integer> selectedCardsIndex) {
+        this.cardsOnBoard = cardsOnBoard;
+        this.selectedCardsIndex = selectedCardsIndex;
+        this.cardsSelected = cardsSelected;
     }
 }

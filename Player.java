@@ -41,31 +41,35 @@ public class Player extends Actor
     public void act()
     {
         selectCards();
+        
         boolean threeCardsHaveBeenSelected = setCardsSelected();
         if (threeCardsHaveBeenSelected)
         {
             dealer.setCardsSelected(cardsOnBoard, cardsSelected, selectedCardsIndex);
-            dealer.checkIfTriple(cardsSelected);
+            dealer.checkIfTriple();
             resetCardsSelected();
         }
     }
     
     public void selectCards() {
+
     for (int i = 0; i < cardsOnBoard.size(); i++) {
         Card card = cardsOnBoard.get(i);
-
-        // Check if the card is clicked
-        if (Greenfoot.mouseClicked(card)) {
-            if (card.isSelected()) {
-                // If the card is already selected, deselect it
-                card.isSelected = false;
-                card.setImage(cardImageInstance); // Set to unselected card image
-                selectedCardsIndex.remove(Integer.valueOf(i)); // Remove from selectedCardIndex
-            } else {
-                // If the card is not selected, select it
-                card.isSelected = true;
-                card.setImage(selectedCardImageInstance); // Set to selected card image
-                selectedCardsIndex.add(i); // Add to selectedCardIndex
+        if(Greenfoot.mouseClicked(card))
+        {
+            if(card.getIsSelected())
+            {
+                card.setIsSelected(false);
+                card.setImage(card.getCardImage());
+                
+                selectedCardsIndex.remove(selectedCardsIndex.indexOf(i));
+            }
+            else
+            {
+                card.setIsSelected(true);
+                card.setImage(card.getSelectedCardImage());
+                
+                selectedCardsIndex.add(i);
             }
         }
     }

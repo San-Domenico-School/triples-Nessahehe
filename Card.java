@@ -61,9 +61,13 @@ public class Card extends Actor
     {
         return selectedCardImage;
     }
-    public boolean isSelected()
+    public boolean getIsSelected()
     {
         return isSelected;
+    }
+    public void setIsSelected(boolean selected)
+    {
+        isSelected = selected;
     }
     public Card(int value) 
     {

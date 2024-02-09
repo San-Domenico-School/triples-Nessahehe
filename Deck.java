@@ -278,9 +278,16 @@ public class Deck
                 }
           }
           }
-    public Card getTopCard()
+    protected Card getTopCard()
         {
-            return shuffledDeck.remove(0);
+            if (shuffledDeck.size() > 0)
+            {
+                return shuffledDeck.remove(0);
+            }
+            else
+            {
+                return null;
+            }
         }
     
     protected ArrayList<Card> getShuffledDeck()
@@ -324,9 +331,10 @@ public class Deck
     
     private void createShuffledDeck() 
     {
-    List<Card> unshuffledList = Arrays.asList(unShuffledDeck);
-    Collections.shuffle(unshuffledList);
-    shuffledDeck.addAll(unshuffledList);
+    for(int i = 1; i < unShuffledDeck.length; i++)
+    {
+        shuffledDeck.add((int) (Math.random() * shuffledDeck.size()), unShuffledDeck[i]);
+    }
     }
     private Card.Shape getRandomShape() {
         Random random = new Random();
