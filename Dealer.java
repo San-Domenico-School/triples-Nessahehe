@@ -2,7 +2,7 @@ import greenfoot.*;
 import java.util.ArrayList;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Dealer here.
+ * The Dealer deals the cards.
  * 
  * @Vanessa Sumski 
  * @01/25/24
@@ -14,11 +14,14 @@ public class Dealer extends Actor
     private ArrayList<Integer> selectedCardsIndex;
     private Card[] cardsSelected;
     private int numCardsInDeck, triplesRemaining;
+    private Scorekeeper scorekeeper;
+    private Animation animation;
     
     
     public Dealer(int numCardsInDeck)
     {
         this.numCardsInDeck = numCardsInDeck;
+        this.scorekeeper = new Scorekeeper();
         triplesRemaining = numCardsInDeck / 3;
         deck = new Deck(numCardsInDeck);
         cardsSelected = new Card[3];
@@ -73,12 +76,12 @@ public class Dealer extends Actor
         }
         else
         {
-            int i = 0;
+            animation.wobble(cardsSelected);
         }
     }
     public void actionIfTriple()
     {
-        //Animations.slideAndTurn(cardsSelected);
+        animation.slideAndTurn(cardsSelected);
         
         for (Card card: cardsSelected)
         {
@@ -96,8 +99,20 @@ public class Dealer extends Actor
                 getWorld().addObject(cardAdded, x, y);
             }
         }
-    }
+        triplesRemaining--;
 
+    // Update the score
+    scorekeeper.updateScore();
+
+    // Set the new UI
+    setUI();
+
+    // Check if the game is over
+    if (triplesRemaining == 0) 
+    {
+        endGame();
+        }
+    }
     public void setCardsSelected(ArrayList<Card> cardsOnBoard, Card[] cardsSelected, ArrayList<Integer> selectedCardsIndex) {
         this.cardsOnBoard = cardsOnBoard;
         this.selectedCardsIndex = selectedCardsIndex;

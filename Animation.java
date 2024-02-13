@@ -4,7 +4,7 @@ import greenfoot.*;
  * Write a description of class Animations here.
  * 
  * @Vanessa Sumski
- * @1/11/2024
+ * @01/11/2024
  */
 public class Animation  
 {

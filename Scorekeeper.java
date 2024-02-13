@@ -2,13 +2,13 @@
  * Write a description of class Scorekeeper here.
  * 
  * @Vanessa Sumski
- * @1/11/2024
+ * @01/11/2024
  */
 public class Scorekeeper  
 {
     private static final int NUM_CARDS_IN_DECK = 27;
     private static int deckSize;
-    private static int score;
+    public static int score;
     private static long startTime;
 
     //Initializing startTime with the current system time

@@ -2,10 +2,10 @@ import greenfoot.*;
 import java.util.ArrayList;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Player here.
+ * The player is the viewer.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @Vanessa Sumski
+ * @02/10/2024
  */
 public class Player extends Actor
 {
